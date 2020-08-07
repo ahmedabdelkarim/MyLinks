@@ -56,13 +56,7 @@ class CoreDataArray<T> where T:NSManagedObject {
     /// Read items from database.
     func fetchFromDatabase() {
         let fetchRequest:NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
-        
-        do {
-            let entityArray = try context.fetch(fetchRequest)
-            items = entityArray
-        } catch {
-            items = nil
-        }
+        items = try? context.fetch(fetchRequest) // items will be nil if fetch throws
     }
     
     /// Creates a new item in array (without saving context). Context should be saved after setting item values.
