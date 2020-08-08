@@ -11,6 +11,7 @@ import UIKit
 class LinksListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noLinksStackView: UIStackView!
     
     //MARK: - Variables
     private let searchController = UISearchController(searchResultsController: nil)
@@ -34,6 +35,8 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
         registerTableCell()
         observeRefreshLinks()
         loadLinksFromDatabase()
+        //force update navigation bar to show large title when app launches (fix for issue: must scroll tableview to convert from small to large title in navigation bar)
+        navigationController?.navigationBar.sizeToFit()
     }
     
     //MARK: - Functions
@@ -42,7 +45,7 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Links"
         
-        self.navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
@@ -58,7 +61,22 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
     
     @objc func loadLinksFromDatabase() {
         DataModels.linksDataModel.links.fetchFromDatabase()
-        //make a copy for UI purposes and manipulate it
+        
+        if(DataModels.linksDataModel.links == nil) {
+            //errorIndicator.isHidden = false // can show error indicator
+            return
+        }
+        
+        if(DataModels.linksDataModel.links.count == 0) {
+            noLinksStackView.isHidden = false
+            tableView.isHidden = true
+            return
+        }
+        
+        noLinksStackView.isHidden = true
+        tableView.isHidden = false
+        
+        //take a copy for UI purposes and manipulate it
         links = DataModels.linksDataModel.links.copy()
         links = links.reversed()
         
@@ -86,10 +104,10 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            return filteredLinks.count
+            return filteredLinks != nil ? filteredLinks.count : 0
         }
         
-        return links.count
+        return links != nil ? links.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,6 +163,11 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
                 }
                 
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                if(links.count == 0) {
+                    noLinksStackView.isHidden = false
+                    tableView.isHidden = true
+                }
             }
             else {
                 Dialogs.showDialog(viewController: self, title: "Couldn't Delete Link")
@@ -156,6 +179,10 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
     
     //MARK: - Search
     func updateSearchResults(for searchController: UISearchController) {
+        if(links == nil) {
+            return
+        }
+        
         filteredLinks = links.filter { (link: LinkEntity) -> Bool in
             return link.title?.lowercased().contains(searchController.searchBar.text!.lowercased().trimmingCharacters(in: .whitespaces)) ?? false
         }

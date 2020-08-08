@@ -15,6 +15,7 @@ class Dialogs {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: buttonTitle, style: .default, handler: { action in completion() }))
             
+            alert.view.tintColor = UIColor(named: "ThemeColor")
             viewController.present(alert, animated: true, completion: nil)
         }
     }
@@ -34,6 +35,7 @@ class Dialogs {
             alert.addAction(UIAlertAction(title: action3Title, style: action3Style, handler: { action in action3Selected?() }))
         }
         
+        alert.view.tintColor = UIColor(named: "ThemeColor")
         viewController.present(alert, animated: true, completion: nil)
     }
 }

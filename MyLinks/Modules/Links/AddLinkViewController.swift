@@ -47,7 +47,7 @@ class AddLinkViewController: UIViewController {
             }
         }
         else { // empty or invalid url
-            Dialogs.showDialog(viewController: self, title: "Please Enter Valid Url")
+            Dialogs.showDialog(viewController: self, title: "Please Enter a Link")
         }
     }
     
