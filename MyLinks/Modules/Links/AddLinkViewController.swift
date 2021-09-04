@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddLinkViewController: UIViewController {
+class AddLinkViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Outlets
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var titleTextField: UITextField!
@@ -53,5 +53,17 @@ class AddLinkViewController: UIViewController {
     
     @IBAction func cancelButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(textField == urlTextField) {
+            titleTextField.becomeFirstResponder()
+        }
+        else if (textField == titleTextField) {
+            urlTextField.becomeFirstResponder()
+        }
+        
+        return true
     }
 }

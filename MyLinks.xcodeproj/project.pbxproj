@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F5343E4D24E025FF00DE7D2E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5343E4C24E025FF00DE7D2E /* Utilities.swift */; };
 		F5BAA8E924DD493300FC2475 /* CoreDataArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BAA8E824DD493300FC2475 /* CoreDataArray.swift */; };
 		F5BAA8EB24DD7EF700FC2475 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BAA8EA24DD7EF700FC2475 /* DataModels.swift */; };
 		F5BB444624D96F110090FCAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BB444524D96F110090FCAE /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F5343E4C24E025FF00DE7D2E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		F5BAA8E824DD493300FC2475 /* CoreDataArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataArray.swift; sourceTree = "<group>"; };
 		F5BAA8EA24DD7EF700FC2475 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		F5BB444224D96F110090FCAE /* MyLinks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLinks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				F5BB447224DAC18F0090FCAE /* Dialogs.swift */,
+				F5343E4C24E025FF00DE7D2E /* Utilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				F5BB446024D9703E0090FCAE /* Links.xcdatamodeld in Sources */,
 				F5BB446B24D9AE9D0090FCAE /* AddLinkViewController.swift in Sources */,
 				F5BAA8E924DD493300FC2475 /* CoreDataArray.swift in Sources */,
+				F5343E4D24E025FF00DE7D2E /* Utilities.swift in Sources */,
 				F5BB446424D997000090FCAE /* CoreDataModel.swift in Sources */,
 				F5BB445D24D970010090FCAE /* LinksDataModel.swift in Sources */,
 				F5BB447324DAC18F0090FCAE /* Dialogs.swift in Sources */,

@@ -46,18 +46,18 @@
                                 </connections>
                             </tableView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="zAB-Ek-t61">
-                                <rect key="frame" x="148" y="440.5" width="118" height="73.5"/>
+                                <rect key="frame" x="151.5" y="443" width="111.5" height="68.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="link-128" translatesAutoresizingMaskIntoConstraints="NO" id="nh5-u4-HCe">
-                                        <rect key="frame" x="39" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="37.5" y="0.0" width="36" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="a49-dj-ukn"/>
-                                            <constraint firstAttribute="width" constant="40" id="xl7-PQ-DUS"/>
+                                            <constraint firstAttribute="height" constant="36" id="a49-dj-ukn"/>
+                                            <constraint firstAttribute="width" constant="36" id="xl7-PQ-DUS"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Links Exist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIp-rm-8wA">
-                                        <rect key="frame" x="0.0" y="52" width="118" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <rect key="frame" x="0.0" y="48" width="111.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" name="ThemeColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -134,13 +134,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="http://www.example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yRU-Oj-g9n">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="http://www.example.com" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yRU-Oj-g9n">
                                                 <rect key="frame" x="0.0" y="27.5" width="366" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="bJq-C9-Wbo"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" textContentType="url"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="next" textContentType="url"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ig8-Qp-zDT" id="FeL-CK-Y7S"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -157,13 +160,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="My Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YlY-oi-fP8">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="My Link" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YlY-oi-fP8">
                                                 <rect key="frame" x="0.0" y="27.5" width="366" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="eDp-QY-zgc"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" returnKeyType="next"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ig8-Qp-zDT" id="0hu-sE-Seg"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -181,6 +187,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="tintColor" name="ThemeColor"/>
                         <constraints>
                             <constraint firstItem="GzP-Z1-De7" firstAttribute="trailing" secondItem="bBY-ci-CIg" secondAttribute="trailing" id="0CB-wo-CUr"/>
                             <constraint firstItem="bXq-Go-IxT" firstAttribute="top" secondItem="bBY-ci-CIg" secondAttribute="bottom" constant="48" id="Ir2-VQ-e4i"/>

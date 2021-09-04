@@ -37,6 +37,10 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
         loadLinksFromDatabase()
         //force update navigation bar to show large title when app launches (fix for issue: must scroll tableview to convert from small to large title in navigation bar)
         navigationController?.navigationBar.sizeToFit()
+        
+        changeDoneButtonColorWhenKeyboardShows()
+        
+        
     }
     
     //MARK: - Functions
@@ -189,5 +193,106 @@ class LinksListViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView.reloadData()
     }
+    
+    
+    
+    
+    private func changeDoneButtonColorWhenKeyboardShows()
+    {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) -> Void in
+            self.changeKeyboardDoneKeyColor()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ch), name: UITextField.textDidChangeNotification, object: searchController.searchBar.searchTextField)
+    }
+    
+    @objc func ch() {
+        self.changeKeyboardDoneKeyColor()
+    }
+    
+    
+    private func changeKeyboardDoneKeyColor()
+    {
+        let (keyboard, keys) = getKeyboardAndKeys()
+        
+        if(added) {
+            newButton.removeFromSuperview()
+            added = false
+        }
+        
+        if(added) {
+            return
+        }
+        
+        let frame = keyboard.subviews.last?.frame
+        
+        keyboard.subviews.last?.removeFromSuperview()
+        
+        let newButton = newDoneButtonWithOld(oldFrame: frame!)
+        keyboard.addSubview(newButton)
+        added = true
+        
+        
+        
+        
+        //      for key in keys {
+        //        if keyIsOnBottomRightEdge(key: key, keyboardView: keyboard) {
+        //            let newButton = newDoneButtonWithOld(oldButton: key)
+        //          keyboard.addSubview(newButton)
+        //        }
+        //      }
+    }
+    
+    private func getKeyboardAndKeys() -> (keyboard: UIView, keys: [UIView])!
+    {
+        for keyboardWindow in UIApplication.shared.windows {
+            for view in keyboardWindow.subviews {
+                for keyboard in Utilities.subviewsOfView(view: view, withType: "UIKBKeyplaneView") {
+                    let keys = Utilities.subviewsOfView(view: keyboard, withType: "UIKBKeyView")
+                    return (keyboard, keys)
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    private func keyIsOnBottomRightEdge(key: UIView, keyboardView: UIView) -> Bool
+    {
+        let margin: CGFloat = 5
+        let onRightEdge = key.frame.origin.x + key.frame.width + margin > keyboardView.frame.width
+        let onBottom = key.frame.origin.y + key.frame.height + margin > keyboardView.frame.height
+        
+        return onRightEdge && onBottom
+    }
+    
+    var newButton:UIButton!
+    var added = false
+    
+    private func newDoneButtonWithOld(oldFrame: CGRect) -> UIView
+    {
+        let newFrame = CGRect(x: oldFrame.origin.x + 2,
+                              y: oldFrame.origin.y + 1,
+                              width: oldFrame.size.width - 4,
+                              height: oldFrame.size.height - 4)
+        
+        newButton = UIButton(frame: newFrame)
+        newButton.backgroundColor = .systemGreen
+        newButton.layer.cornerRadius = 4;
+        newButton.setTitle("search", for: .normal)
+        newButton.titleLabel?.font = .systemFont(ofSize: 16)
+        //shadow
+        newButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.35).cgColor
+        newButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        newButton.layer.shadowRadius = 0
+        newButton.layer.shadowOpacity = 1.0
+        newButton.layer.masksToBounds = false
+        
+        newButton.addTarget(self.searchController.searchBar, action: #selector(UIResponder.resignFirstResponder), for: .touchUpInside)
+        
+        return newButton
+    }
+    
+    
     
 }
